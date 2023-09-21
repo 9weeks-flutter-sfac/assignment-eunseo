@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'GetValBtn.dart';
+
 void main() {
   runApp(const MyApp());
 }
@@ -21,28 +23,6 @@ class _MyAppState extends State<MyApp> {
 
   void getY(val) {
     y = int.parse(val);
-  }
-
-  showResultDialog(BuildContext context, var result) {
-    print(result);
-    showDialog(
-      context: context,
-      builder: (context) {
-        return Dialog(
-          shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.0)),
-          child: SizedBox(
-            width: MediaQuery.of(context).size.width / 2,
-            height: 150,
-            child: Center(
-                child: Text(
-              "$result",
-              style: const TextStyle(fontWeight: FontWeight.bold),
-            )),
-          ),
-        );
-      },
-    );
   }
 
   @override
@@ -103,40 +83,24 @@ class _MyAppState extends State<MyApp> {
               ),
             ),
             const SizedBox(height: 8),
-            ElevatedButton(
-              onPressed: () {
-                showResultDialog(context, x + y);
-              },
-              child: const Text(
-                "더하기의 결과값은?",
-              ),
+            GetValBtn(
+              btnText: "더하기의 결과값은?",
+              res: x + y,
             ),
             const SizedBox(height: 8),
-            ElevatedButton(
-              onPressed: () {
-                showResultDialog(context, x * y);
-              },
-              child: const Text(
-                "곱하기의 결과값은?",
-              ),
+            GetValBtn(
+              btnText: "곱하기의 결과값은?",
+              res: x * y,
             ),
             const SizedBox(height: 8),
-            ElevatedButton(
-              onPressed: () {
-                showResultDialog(context, x - y);
-              },
-              child: const Text(
-                "빼기의 결과값은?",
-              ),
+            GetValBtn(
+              btnText: "빼기의 결과값은?",
+              res: x - y,
             ),
             const SizedBox(height: 8),
-            ElevatedButton(
-              onPressed: () {
-                showResultDialog(context, x / y);
-              },
-              child: const Text(
-                "나누기의 결과값은?",
-              ),
+            GetValBtn(
+              btnText: "나누기의 결과값은?",
+              res: x ~/ y,
             ),
           ],
         ),
