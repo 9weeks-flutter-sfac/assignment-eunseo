@@ -14,19 +14,26 @@ class _LastAssignmentState extends State<LastAssignment> {
       "icon": Icons.sunny,
       "title": "Sun",
       "activeColor": Colors.red,
+      "isActive": false,
     },
     {
       "icon": Icons.nightlight,
       "title": "Moon",
       "activeColor": Colors.yellow,
+      "isActive": false,
     },
     {
       "icon": Icons.star,
       "title": "Star",
       "activeColor": Colors.yellow,
+      "isActive": false,
     },
   ];
-  bool resetAll = false;
+  void resetTile() {
+    for (var menu in menus) {
+      menu["isActive"] = false;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -41,16 +48,16 @@ class _LastAssignmentState extends State<LastAssignment> {
                 icon: menu["icon"]!,
                 title: menu["title"]!,
                 color: menu["activeColor"]!,
-                reset: resetAll,
+                isActive: menu["isActive"]!,
               ),
             )
             .toList(),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          resetAll = !resetAll;
-          print('reset$resetAll');
-          setState(() {});
+          setState(() {
+            resetTile();
+          });
         },
         child: const Icon(
           Icons.refresh,
