@@ -13,18 +13,21 @@ class _LastAssignmentState extends State<LastAssignment> {
     {
       "icon": Icons.sunny,
       "title": "Sun",
+      "name": "태양",
       "activeColor": Colors.red,
       "isActive": false,
     },
     {
       "icon": Icons.nightlight,
       "title": "Moon",
+      "name": "달",
       "activeColor": Colors.yellow,
       "isActive": false,
     },
     {
       "icon": Icons.star,
       "title": "Star",
+      "name": "별",
       "activeColor": Colors.yellow,
       "isActive": false,
     },
@@ -35,6 +38,8 @@ class _LastAssignmentState extends State<LastAssignment> {
     }
   }
 
+  var textController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -42,16 +47,36 @@ class _LastAssignmentState extends State<LastAssignment> {
         title: const Text("4번 과제"),
       ),
       body: Column(
-        children: menus
-            .map(
-              (menu) => MenuTile(
-                icon: menu["icon"]!,
-                title: menu["title"]!,
-                color: menu["activeColor"]!,
-                isActive: menu["isActive"]!,
-              ),
-            )
-            .toList(),
+        children: [
+          Column(
+            children: menus
+                .map(
+                  (menu) => MenuTile(
+                    icon: menu["icon"]!,
+                    title: menu["title"]!,
+                    color: menu["activeColor"]!,
+                    isActive: menu["isActive"]!,
+                  ),
+                )
+                .toList(),
+          ),
+          TextField(
+            keyboardType: TextInputType.text,
+            controller: textController,
+            decoration: const InputDecoration(
+              hintText: "키고 끄고싶은 아이콘을 입력하세요.",
+              border: OutlineInputBorder(),
+            ),
+            onSubmitted: (val) {
+              final targetTile = menus.firstWhere(
+                  (menu) => val.toLowerCase() == menu["title"].toLowerCase());
+
+              setState(() {
+                targetTile["isActive"] = !targetTile["isActive"];
+              });
+            },
+          ),
+        ],
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
