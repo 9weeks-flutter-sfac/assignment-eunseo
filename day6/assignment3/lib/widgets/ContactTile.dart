@@ -15,7 +15,9 @@ class _ContactTileState extends State<ContactTile> {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      leading: Image.network(widget.img),
+      leading: CircleAvatar(
+        backgroundImage: NetworkImage(widget.img),
+      ),
       title: Text(
         widget.name,
       ),

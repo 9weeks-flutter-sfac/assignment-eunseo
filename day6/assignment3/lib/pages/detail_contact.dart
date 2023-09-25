@@ -11,15 +11,18 @@ class DetailContact extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('연락처 상세'),
-        flexibleSpace: Image(
-          image: NetworkImage(img),
-          height: 100,
-          fit: BoxFit.cover,
+      // appbar height 조정
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(200),
+        child: AppBar(
+          title: const Text('연락처 상세'),
+          flexibleSpace: Image(
+            image: NetworkImage(img),
+            fit: BoxFit.cover,
+          ),
+          backgroundColor: Colors.transparent,
+          elevation: 0,
         ),
-        backgroundColor: Colors.transparent,
-        elevation: 0,
       ),
       body: ContactTile(
         name: name,
