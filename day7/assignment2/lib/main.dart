@@ -14,27 +14,27 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+  List<bool> score = [];
+  var pageController = PageController(
+    viewportFraction: 0.8,
+  );
+
+  void handlePrevQuiz() {
+    pageController.previousPage(
+      duration: const Duration(microseconds: 500),
+      curve: Curves.easeIn,
+    );
+  }
+
+  void handleNextQuiz() {
+    pageController.nextPage(
+      duration: const Duration(microseconds: 500),
+      curve: Curves.easeIn,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
-    List<bool> score = [];
-    var pageController = PageController(
-      viewportFraction: 0.8,
-    );
-
-    void handlePrevQuiz() {
-      pageController.previousPage(
-        duration: const Duration(microseconds: 500),
-        curve: Curves.easeIn,
-      );
-    }
-
-    void handleNextQuiz() {
-      pageController.nextPage(
-        duration: const Duration(microseconds: 500),
-        curve: Curves.easeIn,
-      );
-    }
-
     return MaterialApp(
       home: Container(
         decoration: const BoxDecoration(
