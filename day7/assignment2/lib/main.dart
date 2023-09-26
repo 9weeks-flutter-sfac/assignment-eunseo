@@ -16,8 +16,7 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
-    List<Icon> score = [];
-    // List<bool> score = [];
+    List<bool> score = [];
     var pageController = PageController(
       viewportFraction: 0.8,
     );
@@ -59,18 +58,14 @@ class _MyAppState extends State<MyApp> {
                 child: const Icon(Icons.navigate_before)),
             title: Row(
               mainAxisAlignment: MainAxisAlignment.center,
-              children: score,
+              children: score
+                  .map(
+                    (answer) => answer
+                        ? const Icon(Icons.circle_outlined)
+                        : const Icon(Icons.close),
+                  )
+                  .toList(),
             ),
-            // Row(
-            //   mainAxisAlignment: MainAxisAlignment.center,
-            //   children: score
-            //       .map(
-            //         (answer) => answer
-            //             ? const Icon(Icons.circle_outlined)
-            //             : const Icon(Icons.close),
-            //       )
-            //       .toList(),
-            // ),
             actions: [
               GestureDetector(
                 onTap: handleNextQuiz,
@@ -83,19 +78,7 @@ class _MyAppState extends State<MyApp> {
               ),
             ],
           ),
-          body:
-              //Container(
-              // decoration: const BoxDecoration(
-              //   gradient: LinearGradient(
-              //     begin: Alignment.topLeft,
-              //     end: Alignment.bottomRight,
-              //     colors: [
-              //       Colors.pinkAccent,
-              //       Colors.blue,
-              //     ],
-              //   ),
-              // ),
-              PageView.builder(
+          body: PageView.builder(
             controller: pageController,
             itemCount: quizs.length,
             onPageChanged: (value) {
@@ -104,16 +87,18 @@ class _MyAppState extends State<MyApp> {
             itemBuilder: (context, idx) => QuizCard(
               quiz: quizs[idx],
               onCorrect: () {
-                score.add(const Icon(Icons.circle_outlined));
-                print("정답");
-                handleNextQuiz();
-                setState(() {});
+                // score = [...score, true];
+                setState(() {
+                  score.add(true);
+                  handleNextQuiz();
+                });
               },
               onIncorrect: () {
-                score.add(const Icon(Icons.close));
-                print("오답");
-                handleNextQuiz();
-                setState(() {});
+                // score = [...score, false];
+                setState(() {
+                  score.add(false);
+                  handleNextQuiz();
+                });
               },
             ),
           ),
