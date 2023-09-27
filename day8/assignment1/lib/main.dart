@@ -1,6 +1,8 @@
-import 'package:assignment1/widget/CustomCard.dart';
+import 'package:assignment1/widget/CardList.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:shimmer/shimmer.dart';
 
 void main() {
   runApp(const MyApp());
@@ -14,7 +16,29 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+  late Future futureData;
+
+  @override
+  void initState() {
+    super.initState();
+    futureData = getData(url);
+  }
+
   var dio = Dio();
+  var url = "https://sniperfactory.com/sfac/http_day16_dogs";
+  Future getData(url) async {
+    var res = await dio.get(url);
+    return res;
+  }
+
+  Future<void> refreshData() async {
+    var newData = await getData(url);
+    setState(() {
+      futureData = newData;
+    });
+  }
+
+  bool isConnected = false;
 
   @override
   Widget build(BuildContext context) {
@@ -25,45 +49,23 @@ class _MyAppState extends State<MyApp> {
           centerTitle: true,
         ),
         body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Expanded(
-                child: FutureBuilder(
-                    future: dio.get(
-                      "https://sniperfactory.com/sfac/http_day16_dogs",
-                    ),
-                    builder: (context, snapshot) {
-                      if (snapshot.connectionState == ConnectionState.done) {
-                        var res = snapshot.data?.data["body"];
-                        return GridView.builder(
-                          physics: const BouncingScrollPhysics(),
-                          gridDelegate:
-                              const SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: 2,
-                            mainAxisSpacing: 4,
-                            crossAxisSpacing: 4,
-                            childAspectRatio: 0.6,
-                          ),
-                          itemCount: res.length,
-                          itemBuilder: (context, idx) {
-                            return CustomCard(item: res[idx]);
-                          },
-                        );
-                      }
-                      return const Center(
-                        child: Column(
-                          children: [
-                            Text("인터넷 연결 확인중입니다"),
-                            CircularProgressIndicator(),
-                          ],
-                        ),
-                      );
-                    }),
-              )
-            ],
+          child: CardList(
+            future: futureData,
+            url: url,
+            refreshData: refreshData,
           ),
+        ),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () async {
+            var res = await Connectivity().checkConnectivity();
+            if (res == ConnectivityResult.mobile ||
+                res == ConnectivityResult.wifi) {
+              isConnected = true;
+              futureData = getData(url);
+              setState(() {});
+            }
+          },
+          child: const Icon(Icons.wifi_find),
         ),
       ),
     );
