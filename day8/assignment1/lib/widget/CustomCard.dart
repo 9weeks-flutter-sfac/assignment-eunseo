@@ -17,17 +17,23 @@ class CustomCard extends StatelessWidget {
       elevation: 0.5,
       child: Column(
         children: [
-          ClipRRect(
-            borderRadius: BorderRadius.circular(16),
-            child: Image.network(
-              item["url"],
+          Container(
+            width: double.infinity,
+            height: 200,
+            margin: const EdgeInsets.all(8),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(16),
+              child: Image.network(
+                item['url'],
+                fit: BoxFit.cover,
+              ),
             ),
           ),
           const SizedBox(
             height: 8,
           ),
           Text(
-            item["msg"],
+            item['msg'],
             style: const TextStyle(
               fontSize: 16,
             ),
