@@ -28,6 +28,7 @@ class _MyAppState extends State<MyApp> {
   var url = "https://sniperfactory.com/sfac/http_day16_dogs";
   Future getData(url) async {
     var res = await dio.get(url);
+    await Future.delayed(const Duration(seconds: 2));
     return res;
   }
 
@@ -39,6 +40,7 @@ class _MyAppState extends State<MyApp> {
   }
 
   bool isConnected = false;
+  bool connectCheck = false;
 
   @override
   Widget build(BuildContext context) {
@@ -49,14 +51,25 @@ class _MyAppState extends State<MyApp> {
           centerTitle: true,
         ),
         body: Center(
-          child: CardList(
-            future: futureData,
-            url: url,
-            refreshData: refreshData,
-          ),
+          child: connectCheck
+              ? const Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text('인터넷 확인 중 입니다.'),
+                    CircularProgressIndicator(),
+                  ],
+                )
+              : CardList(
+                  future: futureData,
+                  url: url,
+                  refreshData: refreshData,
+                ),
         ),
         floatingActionButton: FloatingActionButton(
           onPressed: () async {
+            connectCheck = true;
+            setState(() {});
+            await Future.delayed(const Duration(seconds: 2));
             var res = await Connectivity().checkConnectivity();
             if (res == ConnectivityResult.mobile ||
                 res == ConnectivityResult.wifi) {
@@ -64,6 +77,7 @@ class _MyAppState extends State<MyApp> {
               futureData = getData(url);
               setState(() {});
             }
+            connectCheck = false;
           },
           child: const Icon(Icons.wifi_find),
         ),
