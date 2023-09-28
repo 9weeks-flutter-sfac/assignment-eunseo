@@ -2,7 +2,6 @@ import 'package:assignment1/widget/CardList.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:shimmer/shimmer.dart';
 
 void main() {
   runApp(const MyApp());
@@ -26,17 +25,16 @@ class _MyAppState extends State<MyApp> {
 
   var dio = Dio();
   var url = "https://sniperfactory.com/sfac/http_day16_dogs";
-  Future getData(url) async {
+  Future<Response> getData(url) async {
     var res = await dio.get(url);
+    print(futureData.runtimeType);
     await Future.delayed(const Duration(seconds: 2));
     return res;
   }
 
-  Future<void> refreshData() async {
-    var newData = await getData(url);
-    setState(() {
-      futureData = newData;
-    });
+  Future<void> refreshData(url) async {
+    futureData = getData(url);
+    setState(() {});
   }
 
   bool isConnected = false;
@@ -65,6 +63,7 @@ class _MyAppState extends State<MyApp> {
                   refreshData: refreshData,
                 ),
         ),
+        // 인터넷 연결 확인 버튼
         floatingActionButton: FloatingActionButton(
           onPressed: () async {
             connectCheck = true;
@@ -74,7 +73,7 @@ class _MyAppState extends State<MyApp> {
             if (res == ConnectivityResult.mobile ||
                 res == ConnectivityResult.wifi) {
               isConnected = true;
-              futureData = getData(url);
+              refreshData(url);
               setState(() {});
             }
             connectCheck = false;
