@@ -9,12 +9,18 @@ class MenuCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
+      clipBehavior: Clip.antiAlias,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(20),
+      ),
       child: Center(
         child: Column(
           children: [
-            Image.asset(
+            Image.network(
               image,
-              height: 80,
+              width: double.infinity,
+              height: 100,
+              fit: BoxFit.cover,
             ),
             Text(
               name,

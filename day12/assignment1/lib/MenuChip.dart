@@ -13,6 +13,7 @@ class _MenuChipState extends State<MenuChip> {
   @override
   Widget build(BuildContext context) {
     return Wrap(
+      spacing: 8,
       children: widget.menus
           .map(
             (String menu) => Chip(
