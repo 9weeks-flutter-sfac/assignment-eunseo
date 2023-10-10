@@ -158,7 +158,7 @@ class _MainPageState extends State<MainPage> {
               ],
             );
           }
-          return const Text('로딩중');
+          return const CircularProgressIndicator();
         },
       ),
       // 결제버튼
