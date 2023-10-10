@@ -21,6 +21,7 @@ class _UploadPageState extends State<UploadPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: Background(
         child: SafeArea(
           child: Column(
@@ -35,7 +36,6 @@ class _UploadPageState extends State<UploadPage> {
                         CustomBtn(
                           onPressed: () {
                             var secret = controller.text;
-                            print(secret);
                             if (secret != '') {
                               try {
                                 SecretCatApi.addSecret(secret);
