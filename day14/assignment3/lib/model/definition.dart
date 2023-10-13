@@ -36,8 +36,8 @@ class Definition {
   factory Definition.fromMap(Map<String, dynamic> map) {
     return Definition(
       definition: map['definition'] as String,
-      synonyms: List<dynamic>.from((map['synonyms'] as List<dynamic>)),
-      antonyms: List<dynamic>.from((map['antonyms'] as List<dynamic>)),
+      synonyms: map['synonyms'] as List<dynamic>,
+      antonyms: map['antonyms'] as List<dynamic>,
     );
   }
 
