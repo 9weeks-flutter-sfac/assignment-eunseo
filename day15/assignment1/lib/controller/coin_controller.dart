@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
 
 class CoinController extends GetxController {
-  RxInt myCoin = 1.obs;
+  RxInt myCoin = 0.obs;
 
   CoinController({
     required this.myCoin,
@@ -10,10 +10,16 @@ class CoinController extends GetxController {
   @override
   void onInit() {
     super.onInit();
+    //'변경되는동안' 1초마다 호출. 처음 트리거되는 행동이 필요하다.
     interval(
       myCoin,
       (callback) => myCoin.value += 1,
     );
+
+    Future.delayed(const Duration(seconds: 1), () {
+      increaseCoin();
+    });
+
     ever(
       myCoin,
       (callback) => (myCoin % 10 == 0) && (myCoin != 0)
@@ -22,13 +28,7 @@ class CoinController extends GetxController {
     );
   }
 
-//Timer를 사용할 수 있도록 한다.
-//코인이 10의 배수가 될때, 코인 10n개를 달성했다는 안내문구를 출력하도록 한다.
-  CoinController.showSnackBar(val) {
-    if (val % 10 == 0) {
-      Get.snackbar('코인 $val개 돌파', '축하합니다!');
-      return;
-    }
-    return;
+  void increaseCoin() {
+    myCoin.value += 1;
   }
 }
