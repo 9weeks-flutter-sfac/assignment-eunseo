@@ -1,3 +1,4 @@
+import 'package:assignment1/controller/app_setting_controller.dart';
 import 'package:assignment1/controller/coin_controller.dart';
 import 'package:assignment1/pages/shop_page.dart';
 import 'package:flutter/material.dart';
@@ -16,6 +17,15 @@ class MainPage extends StatelessWidget {
         myCoin: 1.obs,
       ),
     );
+
+    var appSettingController = Get.put(AppSettingController(
+      isSoundOn: false,
+      isNotificationOn: false,
+      appVersion: 'appVersion',
+      appName: 'appName',
+      appAuthor: 'appAuthor',
+      appPackageName: 'appPackageName',
+    ));
 
     return Scaffold(
       body: Center(

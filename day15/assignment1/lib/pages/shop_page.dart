@@ -1,5 +1,8 @@
+import 'package:assignment1/controller/app_setting_controller.dart';
 import 'package:assignment1/controller/coin_controller.dart';
+import 'package:assignment1/pages/user_page.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:get/instance_manager.dart';
 import 'package:get/state_manager.dart';
 
@@ -8,6 +11,7 @@ class ShopPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var appSettingController = Get.find<AppSettingController>();
     var controller = Get.find<CoinController>();
     return Scaffold(
       body: Center(
@@ -39,6 +43,16 @@ class ShopPage extends StatelessWidget {
               },
               child: const Text(
                 'reset',
+              ),
+            ),
+            TextButton(
+              onPressed: () {
+                Get.to(
+                  const UserPage(),
+                );
+              },
+              child: const Text(
+                '유저 페이지로 이동',
               ),
             ),
           ],
