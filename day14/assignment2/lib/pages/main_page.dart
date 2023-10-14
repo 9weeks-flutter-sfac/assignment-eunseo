@@ -1,3 +1,4 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:assignment2/const/url.dart';
 import 'package:assignment2/model/user.dart';
 import 'package:assignment2/widget/contact_tile.dart';
@@ -18,7 +19,7 @@ class _MainPageState extends State<MainPage> {
     var res = await dio.get(url);
     var data = List<Map<String, dynamic>>.from(res.data);
     users = data.map((e) => User.fromMap(e)).toList();
-    // print(users);
+    setState(() {});
   }
 
   @override
@@ -37,11 +38,15 @@ class _MainPageState extends State<MainPage> {
           foregroundColor: Colors.black,
         ),
         body: ListView.builder(
-          itemCount: users.length ?? 0,
+          itemCount: users.length,
           itemBuilder: (context, index) {
-            return ContactTile(
-              imageUrl: '$imageUrl/${users[index].id}.jpg',
-              user: users[index],
+            return FadeInRight(
+              // from: index * 15,
+              delay: Duration(milliseconds: index * 100),
+              child: ContactTile(
+                imageUrl: '$imageUrl/${users[index].id}.jpg',
+                user: users[index],
+              ),
             );
           },
         ));

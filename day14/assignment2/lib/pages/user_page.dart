@@ -1,3 +1,4 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:assignment2/model/user.dart';
 import 'package:assignment2/widget/company_tile.dart';
 import 'package:assignment2/widget/information_tile.dart';
@@ -64,17 +65,45 @@ class UserPage extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 16),
-                Text(
-                  user.name,
-                  style: const TextStyle(
-                    fontSize: 32,
-                    fontWeight: FontWeight.bold,
+                FadeIn(
+                  delay: const Duration(milliseconds: 600),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      Text(
+                        user.name,
+                        style: const TextStyle(
+                          fontSize: 32,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      const Divider(),
+                    ],
                   ),
                 ),
-                const Divider(),
-                InformationTile(user: user),
-                const Divider(),
-                CompanyTile(user: user),
+                FadeIn(
+                  delay: const Duration(milliseconds: 900),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      InformationTile(
+                        user: user,
+                      ),
+                      const Divider(),
+                    ],
+                  ),
+                ),
+                FadeIn(
+                  delay: const Duration(milliseconds: 1200),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      CompanyTile(
+                        company: user.company,
+                      ),
+                    ],
+                  ),
+                ),
               ],
             ),
           ),

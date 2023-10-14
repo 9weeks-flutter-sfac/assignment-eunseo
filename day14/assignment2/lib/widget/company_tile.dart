@@ -1,14 +1,12 @@
 import 'package:assignment2/model/company.dart';
-import 'package:assignment2/model/user.dart';
 import 'package:flutter/material.dart';
 
 class CompanyTile extends StatelessWidget {
-  const CompanyTile({super.key, required this.user});
-  final User user;
+  const CompanyTile({super.key, required this.company});
+  final Company company;
 
   @override
   Widget build(BuildContext context) {
-    Company company = user.company;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
