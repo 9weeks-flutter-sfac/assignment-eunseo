@@ -2,14 +2,16 @@ import 'package:assignment1/model/user.dart';
 import 'package:assignment1/util/api_routes.dart';
 import 'package:assignment1/util/routes.dart';
 import 'package:get/get.dart';
-import 'package:get/state_manager.dart';
 import 'package:dio/dio.dart';
 
 class AuthController extends GetxController {
   final Rxn<User> _user = Rxn();
+  final Rxn _token = Rxn();
+
   Dio dio = Dio();
 
   User? get user => _user.value;
+  String? get token => _token.value;
 
   login(String id, String pw) async {
     dio.options.baseUrl = 'http://52.79.115.43:8090';
@@ -21,6 +23,7 @@ class AuthController extends GetxController {
       if (res.statusCode == 200) {
         var user = User.fromMap(res.data['record']);
         _user(user);
+        _token(res.data["token"]);
       }
     } on DioException catch (e) {
       print(e.message);

@@ -1,5 +1,6 @@
 import 'package:assignment1/controller/auth_controller.dart';
 import 'package:assignment1/controller/main_controller.dart';
+import 'package:assignment1/model/document.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:get/instance_manager.dart';
@@ -11,6 +12,7 @@ class MainPage extends GetView<MainController> {
   @override
   Widget build(BuildContext context) {
     var user = Get.find<AuthController>().user!;
+    var docs = controller.documents;
 
     return Scaffold(
       bottomNavigationBar: Obx(
@@ -35,6 +37,25 @@ class MainPage extends GetView<MainController> {
                     fontSize: 32,
                   ),
                 ),
+                docs != null
+                    ? ListView.builder(
+                        shrinkWrap: true,
+                        itemCount: docs.length ?? 0,
+                        itemBuilder: (context, index) {
+                          return Column(
+                            children: [
+                              ListTile(
+                                title: Text(docs[index].title),
+                                subtitle: Text(docs[index].content),
+                              ),
+                              (docs[index].attachment_url != '')
+                                  ? Image.network(docs[index].attachment_url!)
+                                  : Container(),
+                            ],
+                          );
+                        },
+                      )
+                    : Container()
               ],
             ),
             Column(
