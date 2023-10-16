@@ -12,7 +12,7 @@ class MainPage extends GetView<MainController> {
   @override
   Widget build(BuildContext context) {
     var user = Get.find<AuthController>().user!;
-    var docs = controller.documents;
+    List<Document>? docs = controller.documents;
 
     return Scaffold(
       bottomNavigationBar: Obx(
