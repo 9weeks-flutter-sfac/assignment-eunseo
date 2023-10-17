@@ -1,6 +1,8 @@
 import 'dart:math';
 
 import 'package:animate_do/animate_do.dart';
+import 'package:assignment1/util/api_routes.dart';
+import 'package:assignment1/util/variables/basicUrl.dart';
 import 'package:assignment1/view/widgets/Buble.dart';
 import 'package:flutter/material.dart';
 
@@ -27,11 +29,12 @@ class AuthorItem extends StatelessWidget {
             duration: const Duration(seconds: 5),
             infinite: true,
             child: Bubble(
-              child: avatar != ''
-                  ? Image.network(
-                      avatar!,
-                    )
-                  : Image.asset('assets/imgs/origami.png'),
+              child: Image.asset('assets/imgs/origami.png'),
+              // avatar != ''
+              //     ? Image.network(
+              //         avatar!,
+              //       )
+              //     : Image.asset('assets/imgs/origami.png'),
             ),
           ),
         ),
