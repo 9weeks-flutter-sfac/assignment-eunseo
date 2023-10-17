@@ -2,8 +2,10 @@
 
 import 'package:assignment1/util/app_routes.dart';
 import 'package:assignment1/view/pages/author_page.dart';
+import 'package:assignment1/view/pages/login_page.dart';
 import 'package:assignment1/view/pages/main_page.dart';
 import 'package:assignment1/view/pages/secret_page.dart';
+import 'package:assignment1/view/pages/signup_page.dart';
 import 'package:assignment1/view/pages/upload_page.dart';
 import 'package:get/get.dart';
 
@@ -34,5 +36,7 @@ class AppPages {
     GetPage(name: AppRoutes.author, page: () => AuthorPage()),
     GetPage(name: AppRoutes.main, page: () => MainPage()),
     GetPage(name: AppRoutes.upload, page: () => UploadPage()),
+    GetPage(name: AppRoutes.login, page: () => LoginPage()),
+    GetPage(name: AppRoutes.signup, page: () => SignupPage()),
   ];
 }
