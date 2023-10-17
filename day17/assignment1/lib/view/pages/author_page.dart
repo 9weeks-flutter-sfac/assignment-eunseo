@@ -12,15 +12,16 @@ class AuthorPage extends GetView<AuthorController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      extendBodyBehindAppBar: true,
+      appBar: const CustomAppbar(
+        title: '비밀스러운 사람들..',
+      ),
       body: Background(
         child: SafeArea(
           child: SingleChildScrollView(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const CustomAppbar(
-                  title: '비밀스러운 사람들..',
-                ),
                 Container(
                   alignment: Alignment.center,
                   margin: const EdgeInsets.symmetric(

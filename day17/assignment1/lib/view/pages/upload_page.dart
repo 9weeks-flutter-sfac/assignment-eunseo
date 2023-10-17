@@ -16,19 +16,26 @@ class UploadPage extends GetView<UploadController> {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
+      extendBodyBehindAppBar: true,
+      appBar: CustomAppbar(title: controller.isUploaded ? '비밀 접수중' : '내 비밀은'),
       body: Background(
         child: SafeArea(
           child: Obx(
             () => Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                CustomAppbar(title: controller.isUploaded ? '비밀 접수중' : '내 비밀은'),
                 controller.isUploaded
                     ? Container()
                     : Column(
                         children: [
-                          CustomTextField(
-                            controller: controller.secretController,
+                          Padding(
+                            padding: const EdgeInsets.all(30.0),
+                            child: CustomTextField(
+                              label: '',
+                              controller: controller.secretController,
+                              maxLines: 5,
+                              minLines: 5,
+                            ),
                           ),
                           CustomBtn(
                             onPressed: () {
@@ -38,6 +45,7 @@ class UploadPage extends GetView<UploadController> {
                               }
                               return;
                             },
+                            label: '비밀접수하기',
                           ),
                         ],
                       ),

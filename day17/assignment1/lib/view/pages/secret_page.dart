@@ -13,11 +13,13 @@ class SecretPage extends GetView<SecretController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      extendBodyBehindAppBar: true,
+      appBar: const CustomAppbar(title: 'shit..'),
       body: Background(
         child: SafeArea(
           child: Column(
             children: [
-              const CustomAppbar(title: 'shit..'),
+              // const CustomAppbar(title: 'shit..'),
               Expanded(
                 child: Obx(
                   () => PageView.builder(
