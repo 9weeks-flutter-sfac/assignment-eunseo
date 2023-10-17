@@ -5,7 +5,7 @@ import 'package:dio/dio.dart';
 import 'package:get/get.dart';
 
 class SecretController extends GetxController {
-  final Rxn<List<Secret>> _secrets = Rxn();
+  final Rxn<List<Secret>> _secrets = Rxn([]);
 
   List<Secret>? get userList => _secrets.value;
 

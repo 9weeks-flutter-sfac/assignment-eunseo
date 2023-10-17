@@ -5,7 +5,7 @@ import 'package:dio/dio.dart';
 import 'package:get/get.dart';
 
 class AuthorController extends GetxController {
-  final Rxn<List<User>> _userList = Rxn();
+  final Rxn<List<User>> _userList = Rxn([]);
 
   List<User>? get userList => _userList.value;
 
@@ -25,6 +25,7 @@ class AuthorController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    readAuthors();
+    readAuthors(); //초기 데이터 받도록 실행.
+    // @todo 데이터 업데이트 될때마다 실행되어야함.: ever
   }
 }
