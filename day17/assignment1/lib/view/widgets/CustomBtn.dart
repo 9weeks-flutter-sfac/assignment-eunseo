@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
 
 class CustomBtn extends StatelessWidget {
-  const CustomBtn({super.key, required this.onPressed});
+  const CustomBtn({
+    super.key,
+    required this.onPressed,
+    required this.label,
+  });
   final void Function() onPressed;
+  final String label;
 
   @override
   Widget build(BuildContext context) {
@@ -16,9 +21,9 @@ class CustomBtn extends StatelessWidget {
           borderRadius: BorderRadius.circular(20),
         ),
       ),
-      child: const Text(
-        '비밀접수하기',
-        style: TextStyle(
+      child: Text(
+        label,
+        style: const TextStyle(
           fontSize: 24,
           color: Colors.white,
         ),
