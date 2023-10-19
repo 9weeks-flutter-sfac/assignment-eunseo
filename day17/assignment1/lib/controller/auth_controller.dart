@@ -47,11 +47,10 @@ class AuthController extends GetxController {
         'username': username ?? '',
       });
       if (res.statusCode == 200) {
-        // 로그인페이지로 이동
         Get.toNamed(AppRoutes.login);
-        print('가입성공');
       }
     } on DioException catch (e) {
+      print('가입실패');
       print(e.message);
       print(e.response!.realUri);
     }
