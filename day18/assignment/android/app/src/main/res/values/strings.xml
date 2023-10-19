@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">assignment</string>
+    <string name="facebook_app_id">280143628258239</string>
+    <string name="fb_login_protocol_scheme">fb280143628258239</string>
+    <string name="facebook_client_token">d96ef8ff91295aeda18ca0e86cc334e7</string>
+</resources>

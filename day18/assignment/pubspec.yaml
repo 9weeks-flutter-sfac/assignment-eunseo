@@ -36,6 +36,7 @@ dependencies:
   flutter:
     sdk: flutter
   get: ^4.6.6
+  flutter_login_facebook: ^1.8.0
 
 dev_dependencies:
   flutter_lints: ^2.0.0
