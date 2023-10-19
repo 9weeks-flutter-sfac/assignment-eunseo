@@ -35,6 +35,7 @@ class SecretController extends GetxController {
       });
       if (res.statusCode == 200) {
         //비밀 확인하러 가기 알럿?
+        readSecrets();
       }
     } catch (e) {
       print(e);

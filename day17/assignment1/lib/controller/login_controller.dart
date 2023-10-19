@@ -11,5 +11,7 @@ class LoginController extends GetxController {
       idController.text,
       pwController.text,
     );
+    idController.text = '';
+    pwController.text = '';
   }
 }

@@ -37,9 +37,12 @@ class AuthorPage extends GetView<AuthorController> {
                           const SliverGridDelegateWithFixedCrossAxisCount(
                               crossAxisCount: 3),
                       itemBuilder: (context, idx) {
-                        return AuthorItem(
-                          name: controller.userList![idx].name,
-                          avatar: controller.userList![idx].avatar,
+                        return Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: AuthorItem(
+                            name: controller.userList![idx].username,
+                            avatar: controller.userList![idx].avatar,
+                          ),
                         );
                       },
                     ),

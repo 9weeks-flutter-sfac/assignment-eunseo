@@ -24,9 +24,13 @@ class Secret extends StatelessWidget {
         infinite: true,
         child: Bubble(
           child: Center(
-            child: Expanded(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: 28,
+                vertical: 8,
+              ),
               child: Text(
-                maxLines: 3,
+                maxLines: 5,
                 overflow: TextOverflow.ellipsis,
                 secret != '' ? secret : 'null',
                 style: const TextStyle(fontSize: 18),

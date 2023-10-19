@@ -19,7 +19,6 @@ class SecretPage extends GetView<SecretController> {
         child: SafeArea(
           child: Column(
             children: [
-              // const CustomAppbar(title: 'shit..'),
               Expanded(
                 child: Obx(
                   () => PageView.builder(

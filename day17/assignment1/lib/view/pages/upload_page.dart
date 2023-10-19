@@ -1,4 +1,5 @@
 import 'package:animate_do/animate_do.dart';
+import 'package:assignment1/controller/auth_controller.dart';
 import 'package:assignment1/controller/upload_controller.dart';
 import 'package:assignment1/util/Alert.dart';
 import 'package:assignment1/view/widgets/Background.dart';
@@ -17,56 +18,72 @@ class UploadPage extends GetView<UploadController> {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       extendBodyBehindAppBar: true,
-      appBar: CustomAppbar(title: controller.isUploaded ? '비밀 접수중' : '내 비밀은'),
+      appBar: const CustomAppbar(title: '내 비밀은'),
       body: Background(
         child: SafeArea(
           child: Obx(
             () => Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                controller.isUploaded
-                    ? Container()
-                    : Column(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.all(30.0),
-                            child: CustomTextField(
-                              label: '',
-                              controller: controller.secretController,
-                              maxLines: 5,
-                              minLines: 5,
+                Stack(
+                  children: [
+                    Column(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.all(30.0),
+                          child: CustomTextField(
+                            label: '',
+                            controller: controller.secretController,
+                            maxLines: 5,
+                            minLines: 5,
+                          ),
+                        ),
+                        CustomBtn(
+                          onPressed: () {
+                            if (controller.secretController.text != '') {
+                              controller.upload();
+                            }
+                            return;
+                          },
+                          label: '비밀접수하기',
+                        ),
+                      ],
+                    ),
+                    Visibility(
+                      visible: controller.isUploaded,
+                      child: Pulse(
+                        child: Container(
+                          margin: const EdgeInsets.symmetric(
+                            horizontal: 30,
+                            vertical: 50,
+                          ),
+                          width: double.infinity,
+                          padding: const EdgeInsets.all(50),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(20),
+                            color: Colors.white,
+                          ),
+                          child: const Text(
+                            '비밀은 꼭 지켜주겠다냥!',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              fontSize: 24,
                             ),
                           ),
-                          CustomBtn(
-                            onPressed: () {
-                              if (controller.secretController.text != '') {
-                                controller.upload();
-                                // controller.handleChangeAnonymous(true);
-                              }
-                              return;
-                            },
-                            label: '비밀접수하기',
-                          ),
-                        ],
-                      ),
-                controller.isUploaded
-                    ? ShakeY(
-                        from: 20,
-                        duration: const Duration(seconds: 2),
-                        child: FadeOutLeftBig(
-                          animate: true,
-                          duration: const Duration(seconds: 5),
-                          child: Image.asset(
-                            'assets/imgs/origami.png',
-                          ),
-                        ),
-                      )
-                    : Bounce(
-                        child: Image.asset(
-                          'assets/imgs/cat.png',
-                          width: 300,
                         ),
                       ),
+                    ),
+                  ],
+                ),
+                Bounce(
+                  child: Bounce(
+                    animate: controller.isUploaded,
+                    child: Image.asset(
+                      'assets/imgs/cat.png',
+                      width: 300,
+                    ),
+                  ),
+                ),
               ],
             ),
           ),

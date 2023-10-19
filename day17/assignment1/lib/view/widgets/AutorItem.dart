@@ -29,19 +29,19 @@ class AuthorItem extends StatelessWidget {
             duration: const Duration(seconds: 5),
             infinite: true,
             child: Bubble(
-              child: Image.asset('assets/imgs/origami.png'),
-              // avatar != ''
-              //     ? Image.network(
-              //         avatar!,
-              //       )
-              //     : Image.asset('assets/imgs/origami.png'),
+              child: avatar != ''
+                  ? Image.network(
+                      avatar!,
+                    )
+                  : Image.asset('assets/imgs/origami.png'),
             ),
           ),
         ),
         Text(
           name,
+          textAlign: TextAlign.center,
           style: const TextStyle(
-            fontSize: 24,
+            fontSize: 20,
           ),
         ),
       ],

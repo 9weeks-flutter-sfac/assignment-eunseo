@@ -6,7 +6,6 @@ import 'package:assignment1/controller/signup_controller.dart';
 import 'package:assignment1/controller/upload_controller.dart';
 import 'package:assignment1/util/pages.dart';
 import 'package:assignment1/view/pages/auth_page.dart';
-import 'package:assignment1/view/pages/main_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -33,7 +32,6 @@ class MyApp extends StatelessWidget {
       }),
       getPages: AppPages.pages,
       home: const Scaffold(
-        // body: MainPage(),
         body: AuthPage(),
       ),
     );

@@ -48,8 +48,8 @@ class AuthController extends GetxController {
       });
       if (res.statusCode == 200) {
         // 로그인페이지로 이동
+        Get.toNamed(AppRoutes.login);
         print('가입성공');
-        print('$email$username');
       }
     } on DioException catch (e) {
       print(e.message);
