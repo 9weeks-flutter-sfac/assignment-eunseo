@@ -1,4 +1,5 @@
 import 'package:assignment1/controller/auth_controller.dart';
+import 'package:assignment1/util/clear_text_fields.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -11,7 +12,9 @@ class LoginController extends GetxController {
       idController.text,
       pwController.text,
     );
-    idController.text = '';
-    pwController.text = '';
+    clearTextField([
+      idController,
+      pwController,
+    ]);
   }
 }

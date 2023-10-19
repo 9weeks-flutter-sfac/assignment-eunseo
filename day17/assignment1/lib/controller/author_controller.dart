@@ -26,6 +26,5 @@ class AuthorController extends GetxController {
   void onInit() {
     super.onInit();
     readAuthors(); //초기 데이터 받도록 실행.
-    // @todo 데이터 업데이트 될때마다 실행되어야함.: ever
   }
 }
