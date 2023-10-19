@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:assignment1/controller/auth_controller.dart';
 import 'package:assignment1/controller/secret_controller.dart';
 import 'package:flutter/material.dart';
@@ -15,7 +17,7 @@ class UploadController extends GetxController {
     if (secretController.text != '') {
       try {
         var user = Get.find<AuthController>().user;
-        if (_isAnonymous == false) {
+        if (_isAnonymous == false || user != null) {
           Get.find<SecretController>().uploadSecrets(
             secretController.text,
             user!.id,
@@ -28,14 +30,17 @@ class UploadController extends GetxController {
             '',
           );
         }
-        _isUploaded.value = true;
+        _isUploaded(true);
         secretController.clear();
+        Timer(const Duration(seconds: 3), () {
+          _isUploaded(false);
+        });
       } catch (e) {
         // 비밀을 올리지 못했다!
+        print('비밀을 올리지 못했다!');
         print(e);
       }
     }
-    _isUploaded.value = false;
   }
 
   _handleChangeAnonymous(bool check) {
