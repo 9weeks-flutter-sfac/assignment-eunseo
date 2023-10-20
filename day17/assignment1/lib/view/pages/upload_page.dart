@@ -25,33 +25,9 @@ class UploadPage extends GetView<UploadController> {
             () => Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Stack(
-                  children: [
-                    Column(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.all(30.0),
-                          child: CustomTextField(
-                            label: '',
-                            controller: controller.secretController,
-                            maxLines: 5,
-                            minLines: 5,
-                          ),
-                        ),
-                        CustomBtn(
-                          onPressed: () {
-                            if (controller.secretController.text != '') {
-                              controller.upload();
-                            }
-                            return;
-                          },
-                          label: '비밀접수하기',
-                        ),
-                      ],
-                    ),
-                    Visibility(
-                      visible: controller.isUploaded,
-                      child: Pulse(
+                controller.isUploaded == true
+                    // controller.isUploaded == false
+                    ? Pulse(
                         child: Container(
                           margin: const EdgeInsets.symmetric(
                             horizontal: 30,
@@ -62,6 +38,14 @@ class UploadPage extends GetView<UploadController> {
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(20),
                             color: Colors.white,
+                            boxShadow: const [
+                              BoxShadow(
+                                color: Colors.white,
+                                spreadRadius: 5,
+                                blurRadius: 10,
+                                offset: Offset(0, 0),
+                              ),
+                            ],
                           ),
                           child: const Text(
                             '비밀은 꼭 지켜주겠다냥!',
@@ -71,10 +55,29 @@ class UploadPage extends GetView<UploadController> {
                             ),
                           ),
                         ),
+                      )
+                    : Column(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.all(30.0),
+                            child: CustomTextField(
+                              label: '',
+                              controller: controller.secretController,
+                              maxLines: 5,
+                              minLines: 5,
+                            ),
+                          ),
+                          CustomBtn(
+                            onPressed: () {
+                              if (controller.secretController.text != '') {
+                                controller.upload();
+                              }
+                              return;
+                            },
+                            label: '비밀접수하기',
+                          ),
+                        ],
                       ),
-                    ),
-                  ],
-                ),
                 Bounce(
                   child: Bounce(
                     animate: controller.isUploaded,
