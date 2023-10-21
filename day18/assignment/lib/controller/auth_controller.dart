@@ -8,13 +8,15 @@ class AuthController extends GetxController {
 
   FacebookAccessToken? get token => _fbToken.value;
 
-  fbLogin(String id, String pw) async {
+  fbLogin() async {
     final fb = FacebookLogin();
 
     final res = await fb.logIn(permissions: [
       FacebookPermission.publicProfile,
       FacebookPermission.email,
     ]);
+
+    print(res);
 
     if (res.status == 200) {
       _fbToken(res.accessToken);
@@ -40,6 +42,6 @@ class AuthController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    ever(_fbToken, (callback) => _handleAuthChanged);
+    ever(_fbToken, (fbToken) => _handleAuthChanged(fbToken));
   }
 }

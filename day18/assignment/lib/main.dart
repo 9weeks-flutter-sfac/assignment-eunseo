@@ -1,4 +1,5 @@
 import 'package:assignment/controller/auth_controller.dart';
+import 'package:assignment/controller/login_controller.dart';
 import 'package:assignment/controller/post_controller.dart';
 import 'package:assignment/firebase_options.dart';
 import 'package:assignment/view/page/assignment_page.dart';
@@ -24,6 +25,7 @@ class MyApp extends StatelessWidget {
       initialBinding: BindingsBuilder(() {
         Get.put(AuthController());
         Get.lazyPut(() => PostController());
+        Get.lazyPut(() => LoginController());
       }),
       home: Scaffold(
         body: Center(

@@ -13,16 +13,19 @@ class LoginPage extends GetView<LoginController> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            ElevatedButton(
-              style: const ButtonStyle(
-                  // backgroundColor: Color(0xff39579A),
-                  ),
-              onPressed: controller.fbLogin(),
-              child: const Row(
-                children: [
-                  Icon(Icons.facebook),
-                  Text('페이스북 로그인하기'),
-                ],
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: ElevatedButton(
+                style: const ButtonStyle(
+                    // backgroundColor: Color(0xff39579A),
+                    ),
+                onPressed: controller.fbLogin,
+                child: const Row(
+                  children: [
+                    Icon(Icons.facebook),
+                    Text('페이스북 로그인하기'),
+                  ],
+                ),
               ),
             ),
           ],
